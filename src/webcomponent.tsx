@@ -4,7 +4,7 @@ import { initI18nForWebComponent } from "@/i18n-webcomponent";
 import { WebComponentApp } from "./webcomponent-wrapper";
 import "./index.css";
 
-class OrangeWeeksTour extends HTMLElement {
+class AKindOfArt extends HTMLElement {
   private root: any;
   private shadow: ShadowRoot | null = null;
   private keyboardHandler: ((event: KeyboardEvent) => void) | null = null;
@@ -64,6 +64,7 @@ class OrangeWeeksTour extends HTMLElement {
     mountPoint.style.width = "100%";
     mountPoint.style.height = "100%";
     mountPoint.style.display = "block";
+    mountPoint.style.transform = "scale(1)";
 
     // Inject bundled styles into shadow DOM
     this.injectStyles();
@@ -136,4 +137,4 @@ class OrangeWeeksTour extends HTMLElement {
   }
 }
 
-customElements.define("orange-weeks-tour", OrangeWeeksTour);
+customElements.define("a-kind-of-art", AKindOfArt);

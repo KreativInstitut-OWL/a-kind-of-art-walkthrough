@@ -1,6 +1,6 @@
-# Weidmüller Orange Weeks 2025 Experience
+# A Kind Of Art
 
-> 3D Walkthrough of the Weidmüller Orange Weeks 2025
+> 3D Walkthrough Experience
 
 ## Development
 
@@ -30,12 +30,12 @@ npm run build:wc
 Usage:
 
 ```html
-<orange-weeks-tour
+<a-kind-of-art
   data-base-url="./public"
   data-lang="en"
-  data-initial-scene="foyer">
-</orange-weeks-tour>
-<script type="module" src="./orange-weeks-tour.js"></script>
+  data-initial-scene="foyer"
+></a-kind-of-art>
+<script type="module" src="./a-kind-of-art.js"></script>
 ```
 
 > Build output is in `dist-webcomponent`. The webcomponent can be embedded in any HTML page with the required assets served from `dist-webcomponent/public`.

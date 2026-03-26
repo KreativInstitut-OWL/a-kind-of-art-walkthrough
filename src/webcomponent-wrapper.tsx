@@ -20,6 +20,8 @@ function createIsolatedStores() {
     currentSceneId: "foyer",
     activePoi: null,
     quality: "mq",
+    isSettingsMenuOpen: false,
+    isHelpOpen: false,
   }));
 
   // Isolated touch UI store

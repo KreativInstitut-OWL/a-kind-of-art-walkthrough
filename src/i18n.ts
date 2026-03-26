@@ -44,7 +44,7 @@ export const resources = {
         pressKeyToContact: "Press <0>{{key}}</0> to contact",
       },
       intro: {
-        welcome: "Experience Your Orange Week—now in digital form!",
+        welcome: "Experience A Kind Of Art—now in digital form!",
         skipIntro: "Skip Intro",
         discover: "Discover now!",
       },
@@ -92,7 +92,7 @@ export const resources = {
         pressKeyToContact: "Zum Kontaktieren <0>{{key}}</0> drücken",
       },
       intro: {
-        welcome: "Ihre Orange Week jetzt digital erleben!",
+        welcome: "A Kind Of Art jetzt digital erleben!",
         skipIntro: "Intro überspringen",
         discover: "Jetzt erkunden!",
       },
@@ -102,7 +102,7 @@ export const resources = {
 } as const;
 
 // Only initialize if not in web component mode
-if (!window.customElements.get("orange-weeks-tour")) {
+if (!window.customElements.get("a-kind-of-art")) {
   i18n
     .use(LanguageDetector)
     .use(initReactI18next)

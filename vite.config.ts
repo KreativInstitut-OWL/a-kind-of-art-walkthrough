@@ -34,14 +34,14 @@ export default defineConfig({
         // Web Component build configuration
         lib: {
           entry: path.resolve(__dirname, "src/webcomponent.tsx"),
-          name: "OrangeWeeksTour",
+          name: "AKindOfArt",
           formats: ["es"],
-          fileName: () => "orange-weeks-tour.js",
+          fileName: () => "a-kind-of-art.js",
         },
         rollupOptions: {
           output: {
             inlineDynamicImports: true, // Bundle everything in one file
-            assetFileNames: "orange-weeks-tour.[ext]",
+            assetFileNames: "a-kind-of-art.[ext]",
           },
         },
         cssCodeSplit: false,

@@ -24,7 +24,7 @@ export function trackData(data: TrackData): void {
     window.dataLayer = [];
   }
 
-  const { category = "Orange-Weeks-3D", action, label } = data.eventData;
+  const { category = "AKindOfArt", action, label } = data.eventData;
 
   // Push the event data to dataLayer
   window.dataLayer.push({

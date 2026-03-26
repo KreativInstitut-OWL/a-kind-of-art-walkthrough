@@ -87,7 +87,7 @@ export class PauseStateManager extends Script {
     const playerEntity = this.findPlayerEntity();
     if (!playerEntity) return;
 
-    const controller = playerEntity.script?.firstPersonController as any;
+    const controller = (playerEntity.script as any)?.firstPersonController as any;
     if (!controller) return;
 
     if (controller._keyboardMouseInput) {
@@ -103,9 +103,9 @@ export class PauseStateManager extends Script {
 
   private findPlayerEntity(): Entity | null {
     const scene = (this as any).entity.root;
-    let playerEntity = null;
+    let playerEntity: Entity | null = null;
 
-    const findPlayer = (entity: Entity): void => {
+    const findPlayer = (entity: Entity | any): void => {
       if (entity.name === "Player") {
         playerEntity = entity;
         return;

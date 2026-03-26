@@ -92,7 +92,7 @@ export function PlayCanvasApplication() {
   // Optimize graphics settings for mobile
   const graphicsDeviceOptions = useMemo(() => ({
     antialias: !isMobile,
-    powerPreference: isMobile ? "low-power" : "high-performance",
+    powerPreference: (isMobile ? "low-power" : "high-performance") as any,
   }), [isMobile]);
 
   return (
