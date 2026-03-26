@@ -1,0 +1,15 @@
+---
+alwaysApply: false
+---
+
+Use SplatTransform to transform a ply file into a sog file.
+
+Check https://github.com/playcanvas/splat-transform for more information.
+
+Use the command like this (-H 1 means include one spherical harmonic, which is plenty for our use case):
+
+```bash
+npx -y @playcanvas/splat-transform <input>.ply <output>.sog -H 1
+```
+
+In this project splats are stored in `/public/splats`.
