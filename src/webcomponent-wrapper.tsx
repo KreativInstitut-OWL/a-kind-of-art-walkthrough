@@ -22,6 +22,7 @@ function createIsolatedStores() {
     quality: "mq",
     isSettingsMenuOpen: false,
     isHelpOpen: false,
+    isFullscreenMobileOverlayOpen: true,
   }));
 
   // Isolated touch UI store
@@ -50,6 +51,9 @@ function createIsolatedStores() {
     },
     setActivePoi(poi: any) {
       gameStateStore.setState({ activePoi: poi });
+    },
+    setFullscreenMobileOverlayOpen(isOpen: boolean) {
+      gameStateStore.setState({ isFullscreenMobileOverlayOpen: isOpen });
     },
   };
 

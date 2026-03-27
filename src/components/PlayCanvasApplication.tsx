@@ -16,6 +16,7 @@ import { LoadingOverlay } from "./LoadingOverlay";
 import { SettingsMenu } from "./SettingsMenu";
 import { HelpOverlay } from "./HelpOverlay";
 import { TouchControlsOverlay } from "./TouchControlsOverlay";
+import { FullscreenMobileOverlay } from "./FullscreenMobileOverlay";
 import { usePreferredControls } from "@/hooks/useIsTouch";
 
 function useOnWindowResize({ onResize }: { onResize: () => void }) {
@@ -48,7 +49,7 @@ function ResizeApp() {
 }
 
 export function PlayCanvasApplication() {
-  const { currentSceneId, quality } = useGameState();
+  const { currentSceneId, quality, isFullscreenMobileOverlayOpen } = useGameState();
   const preferredControls = usePreferredControls();
 
   // Detect mobile device
@@ -121,11 +122,12 @@ export function PlayCanvasApplication() {
             <Crosshair />
             <SettingsMenu />
             <HelpOverlay />
-            {preferredControls === 'touch' ? (
+            {isMobile && <FullscreenMobileOverlay />}
+            {preferredControls === 'touch' && !isFullscreenMobileOverlayOpen ? (
               <TouchControlsOverlay />
-            ) : (
+            ) : preferredControls === 'keyboard' && !isFullscreenMobileOverlayOpen ? (
               <KeyboardControlsOverlay />
-            )}
+            ) : null}
           </GameStateProvider>
         </Application>
       </div>

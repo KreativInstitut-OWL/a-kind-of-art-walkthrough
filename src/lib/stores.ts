@@ -26,6 +26,7 @@ export type GameState = {
   quality: "lq" | "mq" | "hq";
   isSettingsMenuOpen: boolean;
   isHelpOpen: boolean;
+  isFullscreenMobileOverlayOpen: boolean;
 };
 
 const DEFAULT_RADIUS = 50;
@@ -92,6 +93,7 @@ const gameStateStore = createStore<GameState>(() => ({
   quality: "lq",
   isSettingsMenuOpen: false,
   isHelpOpen: false,
+  isFullscreenMobileOverlayOpen: true,
 }));
 
 export const gameState = {
@@ -122,6 +124,9 @@ export const gameState = {
   },
   setHelpOpen(isOpen: boolean) {
     gameStateStore.setState({ isHelpOpen: isOpen });
+  },
+  setFullscreenMobileOverlayOpen(isOpen: boolean) {
+    gameStateStore.setState({ isFullscreenMobileOverlayOpen: isOpen });
   },
 };
 
