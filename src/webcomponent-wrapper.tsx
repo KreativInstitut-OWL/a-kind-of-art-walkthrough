@@ -22,6 +22,7 @@ function createIsolatedStores() {
     quality: "mq",
     isSettingsMenuOpen: false,
     isHelpOpen: false,
+    isIntroOpen: true,
     isFullscreenMobileOverlayOpen: true,
   }));
 
@@ -51,6 +52,9 @@ function createIsolatedStores() {
     },
     setActivePoi(poi: any) {
       gameStateStore.setState({ activePoi: poi });
+    },
+    setIntroOpen(isOpen: boolean) {
+      gameStateStore.setState({ isIntroOpen: isOpen });
     },
     setFullscreenMobileOverlayOpen(isOpen: boolean) {
       gameStateStore.setState({ isFullscreenMobileOverlayOpen: isOpen });

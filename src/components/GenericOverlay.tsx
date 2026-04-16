@@ -19,9 +19,18 @@ export function GenericOverlay() {
 
   const handleFullscreen = async () => {
     try {
-      // Get the application container (parent of canvas) to include all UI overlays
-      const appContainer = document.querySelector(".relative.w-full.h-full");
+      // For web components, we need to get the container differently
+      // First try to find the app container within this component
+      let appContainer = document.querySelector(".relative.w-full.h-full");
+      
+      // If not found (we're in Shadow DOM), try to get the closest container or use the shadow host
       if (!appContainer) {
+        // Try to find the canvas container or main app div
+        appContainer = document.querySelector("div[style*='width: 100%'][style*='height: 100%']");
+      }
+      
+      if (!appContainer) {
+        console.warn("Could not find fullscreen container");
         return;
       }
 
@@ -34,32 +43,28 @@ export function GenericOverlay() {
       );
 
       if (!isCurrentlyFullscreen) {
-        // Try to request fullscreen on the app container (includes UI overlays)
-        const request =
-          (appContainer as any).requestFullscreen?.() ||
-          (appContainer as any).webkitRequestFullscreen?.() ||
-          (appContainer as any).mozRequestFullScreen?.() ||
-          (appContainer as any).msRequestFullscreen?.();
-
-        if (request?.catch) {
-          request.catch(() => {});
+        // Try to request fullscreen on the app container
+        try {
+          await (appContainer as any).requestFullscreen?.() ||
+          await (appContainer as any).webkitRequestFullscreen?.() ||
+          await (appContainer as any).mozRequestFullScreen?.() ||
+          await (appContainer as any).msRequestFullscreen?.();
+        } catch (error) {
+          console.warn("Fullscreen request failed:", error);
         }
       } else {
         // Try to exit fullscreen
-        const exitMethod =
-          document.exitFullscreen?.() ||
-          (document as any).webkitExitFullscreen?.() ||
-          (document as any).mozCancelFullScreen?.() ||
-          (document as any).msExitFullscreen?.();
-
-        if (exitMethod?.catch) {
-          exitMethod.catch(() => {
-            // ignore
-          });
+        try {
+          await document.exitFullscreen?.() ||
+          await (document as any).webkitExitFullscreen?.() ||
+          await (document as any).mozCancelFullScreen?.() ||
+          await (document as any).msExitFullscreen?.();
+        } catch (error) {
+          console.warn("Exit fullscreen failed:", error);
         }
       }
-    } catch {
-      // silently fail
+    } catch (error) {
+      console.warn("Fullscreen error:", error);
     }
   };
 

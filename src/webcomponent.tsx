@@ -45,6 +45,9 @@ class AKindOfArt extends HTMLElement {
     // Create shadow DOM
     this.shadow = this.attachShadow({ mode: "open" });
 
+    // Enable fullscreen for this element
+    this.setAttribute("allowFullscreen", "");
+
     // Extract attributes
     const baseUrl = this.getAttribute("data-base-url") || "";
     const lang = this.getAttribute("data-lang") || "en";
@@ -91,12 +94,30 @@ class AKindOfArt extends HTMLElement {
   private injectStyles() {
     if (!this.shadow) return;
 
+    // Add fullscreen styles to Shadow DOM
+    const fullscreenStyle = document.createElement("style");
+    fullscreenStyle.textContent = `
+      :host(:-webkit-full-screen) {
+        width: 100vw;
+        height: 100vh;
+      }
+      :host(:-moz-full-screen) {
+        width: 100vw;
+        height: 100vh;
+      }
+      :host(:fullscreen) {
+        width: 100vw;
+        height: 100vh;
+      }
+    `;
+    this.shadow.appendChild(fullscreenStyle);
+
     // Inject CSS variables directly from theme-vars.css
     import("./theme-vars.css?inline")
       .then((cssModule: any) => {
         const css = cssModule.default;
         // Transform CSS for Shadow DOM: replace :root with :host
-        const shadowCss = css.replace(/:root/g, ':host').replace(/\.dark/g, ':host(.dark)');
+        const shadowCss = css.replace(/:root/g, ':host');
         const varsStyle = document.createElement("style");
         varsStyle.textContent = shadowCss;
         this.shadow!.appendChild(varsStyle);

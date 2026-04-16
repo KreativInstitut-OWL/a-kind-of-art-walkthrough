@@ -8,14 +8,19 @@ export function TouchControlsOverlay() {
   const { left, right } = useTouchUI();
   const [leftTouchId, setLeftTouchId] = React.useState<number | null>(null);
   const [rightTouchId, setRightTouchId] = React.useState<number | null>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   if (!enabled) return null;
 
-  // Fixed positions for joysticks
-  const leftCenterX = 80;
-  const leftCenterY = window.innerHeight - 100;
-  const rightCenterX = window.innerWidth - 80;
-  const rightCenterY = window.innerHeight - 100;
+  // Get container dimensions for responsive positioning
+  const containerHeight = containerRef.current?.offsetHeight || window.innerHeight;
+  const containerWidth = containerRef.current?.offsetWidth || window.innerWidth;
+  
+  // Position joysticks relative to container (90% from top, 20px from edges)
+  const leftCenterX = 60;
+  const leftCenterY = containerHeight - 60;
+  const rightCenterX = containerWidth - 60;
+  const rightCenterY = containerHeight - 60;
 
   // Calculate nub position relative to fixed centers
   const leftDx = left.pos.x - left.center.x;
@@ -132,7 +137,7 @@ export function TouchControlsOverlay() {
   };
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-40 select-none">
+    <div className="pointer-events-none absolute inset-0 z-40 select-none" ref={containerRef}>
       {/* Invisible hit target for left joystick */}
       <div
         className="absolute pointer-events-auto"
@@ -219,7 +224,7 @@ export function TouchControlsOverlay() {
           className="absolute text-xs font-semibold pointer-events-none"
           style={{
             left: leftCenterX - left.radius,
-            top: leftCenterY + left.radius + 12,
+            top: leftCenterY - left.radius - 20,
             textAlign: "center",
             width: left.radius * 2,
             color: "#55fc27",
@@ -282,7 +287,7 @@ export function TouchControlsOverlay() {
           className="absolute text-xs font-semibold pointer-events-none"
           style={{
             left: rightCenterX - right.radius,
-            top: rightCenterY + right.radius + 12,
+            top: rightCenterY - right.radius - 20,
             textAlign: "center",
             width: right.radius * 2,
             color: "#55fc27",

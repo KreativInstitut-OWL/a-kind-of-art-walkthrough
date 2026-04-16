@@ -15,8 +15,8 @@ import { KeyboardControlsOverlay } from "./KeyboardControlsOverlay";
 import { LoadingOverlay } from "./LoadingOverlay";
 import { SettingsMenu } from "./SettingsMenu";
 import { HelpOverlay } from "./HelpOverlay";
+import { IntroOverlay } from "./IntroOverlay";
 import { TouchControlsOverlay } from "./TouchControlsOverlay";
-import { FullscreenMobileOverlay } from "./FullscreenMobileOverlay";
 import { usePreferredControls } from "@/hooks/useIsTouch";
 
 function useOnWindowResize({ onResize }: { onResize: () => void }) {
@@ -122,10 +122,10 @@ export function PlayCanvasApplication() {
             <Crosshair />
             <SettingsMenu />
             <HelpOverlay />
-            {isMobile && <FullscreenMobileOverlay />}
-            {preferredControls === 'touch' && !isFullscreenMobileOverlayOpen ? (
+            <IntroOverlay />
+            {preferredControls === 'touch' ? (
               <TouchControlsOverlay />
-            ) : preferredControls === 'keyboard' && !isFullscreenMobileOverlayOpen ? (
+            ) : preferredControls === 'keyboard' ? (
               <KeyboardControlsOverlay />
             ) : null}
           </GameStateProvider>

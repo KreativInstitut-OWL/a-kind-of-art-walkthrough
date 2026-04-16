@@ -38,10 +38,6 @@ export const resources = {
       poi: {
         pressKeyToView: "Press <0>{{key}}</0> to view",
         touchToView: "Tap to view",
-        contactSubject: 'Inquiry about "{{title}}"',
-        contactBody:
-          'Hello Team Weidmüller,\n\nI am interested in the product / solution "{{title}}".\nCould you please send me more information about [e.g., price, delivery time, specifications] or contact me directly?\n\nThank you very much!\n\nKind regards,\n\n[First Name Last Name]\n[Email Address]\n[Company – optional]\n[Phone Number – optional]',
-        pressKeyToContact: "Press <0>{{key}}</0> to contact",
       },
       intro: {
         welcome: "Experience A Kind Of Art—now in digital form!",
@@ -86,10 +82,6 @@ export const resources = {
       poi: {
         pressKeyToView: "Für mehr Infos <0>{{key}}</0> drücken",
         touchToView: "Tippen zum Ansehen",
-        contactSubject: 'Anfrage zu "{{title}}"',
-        contactBody:
-          'Hallo Weidmüller-Team,\n\nich interessiere mich für das Produkt / die Lösung "{{title}}".\nKönnt ihr mir bitte nähere Informationen zu [z. B. Preis, Lieferzeit, Spezifikationen] senden / mich kontaktieren?\n\nVielen Dank!\n\nMit freundlichen Grüßen,\n\n[Vorname Nachname]\n[E-Mail-Adresse]\n[Firma – optional]\n[Telefonnummer – optional]',
-        pressKeyToContact: "Zum Kontaktieren <0>{{key}}</0> drücken",
       },
       intro: {
         welcome: "A Kind Of Art jetzt digital erleben!",

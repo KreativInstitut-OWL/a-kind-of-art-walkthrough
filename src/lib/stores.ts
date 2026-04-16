@@ -26,6 +26,7 @@ export type GameState = {
   quality: "lq" | "mq" | "hq";
   isSettingsMenuOpen: boolean;
   isHelpOpen: boolean;
+  isIntroOpen: boolean;
   isFullscreenMobileOverlayOpen: boolean;
 };
 
@@ -93,6 +94,7 @@ const gameStateStore = createStore<GameState>(() => ({
   quality: "lq",
   isSettingsMenuOpen: false,
   isHelpOpen: false,
+  isIntroOpen: true,
   isFullscreenMobileOverlayOpen: true,
 }));
 
@@ -124,6 +126,13 @@ export const gameState = {
   },
   setHelpOpen(isOpen: boolean) {
     gameStateStore.setState({ isHelpOpen: isOpen });
+  },
+  toggleIntro() {
+    const state = gameStateStore.getState();
+    gameStateStore.setState({ isIntroOpen: !state.isIntroOpen });
+  },
+  setIntroOpen(isOpen: boolean) {
+    gameStateStore.setState({ isIntroOpen: isOpen });
   },
   setFullscreenMobileOverlayOpen(isOpen: boolean) {
     gameStateStore.setState({ isFullscreenMobileOverlayOpen: isOpen });

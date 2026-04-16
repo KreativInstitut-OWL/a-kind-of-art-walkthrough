@@ -57,10 +57,6 @@ export function HelpOverlay() {
               <span className="font-mono text-white">Maus bewegen</span>
             </div>
             <div className="flex justify-between items-center">
-              <span>Einstellungen öffnen</span>
-              <span className="font-mono text-white">E</span>
-            </div>
-            <div className="flex justify-between items-center">
               <span>Pause</span>
               <span className="font-mono text-white">ESC</span>
             </div>

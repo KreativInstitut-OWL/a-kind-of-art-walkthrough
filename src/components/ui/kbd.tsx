@@ -11,7 +11,7 @@ function Kbd({
       className={cn(
         "bg-[#55fc27] text-black backdrop-blur-lg pointer-events-none inline-flex h-7 w-fit min-w-7 items-center justify-center gap-1 rounded-sm px-1.5 text-sm font-sans tracking-wider font-bold select-none",
         "[&_svg:not([class*='size-'])]:size-4",
-        "[[data-slot=tooltip-content]_&]:bg-[#55fc27]/20 [[data-slot=tooltip-content]_&]:text-[#55fc27] dark:[[data-slot=tooltip-content]_&]:bg-[#55fc27]/10",
+        "[[data-slot=tooltip-content]_&]:bg-[#55fc27]/20 [[data-slot=tooltip-content]_&]:text-[#55fc27]",
         active && "bg-[#55fc27]/80 text-black",
         className
       )}

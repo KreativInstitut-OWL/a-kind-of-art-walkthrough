@@ -4,21 +4,37 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [showQualitySelector, setShowQualitySelector] = useState(() => {
-    // Check if user has already selected quality
-    return !localStorage.getItem("qualitySelected");
+    try {
+      // Check if user has already selected quality
+      return !localStorage.getItem("qualitySelected");
+    } catch (e) {
+      // If localStorage is unavailable, skip quality selector
+      console.warn("localStorage unavailable, skipping quality selector", e);
+      return false;
+    }
   });
 
   const handleQualitySelected = () => {
-    localStorage.setItem("qualitySelected", "true");
-    setShowQualitySelector(false);
+    try {
+      localStorage.setItem("qualitySelected", "true");
+      setShowQualitySelector(false);
+    } catch (e) {
+      console.warn("Failed to save quality selection", e);
+      // Still proceed even if localStorage fails
+      setShowQualitySelector(false);
+    }
   };
 
   useEffect(() => {
     // Subscribe to check if quality was set
     if (showQualitySelector) {
       const handleStorageChange = () => {
-        if (localStorage.getItem("qualitySelected")) {
-          handleQualitySelected();
+        try {
+          if (localStorage.getItem("qualitySelected")) {
+            handleQualitySelected();
+          }
+        } catch (e) {
+          console.warn("Storage check failed", e);
         }
       };
       window.addEventListener("storage", handleStorageChange);
