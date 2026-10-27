@@ -28,39 +28,16 @@ export function GameStateProvider({ children }: { children: React.ReactNode }) {
   }, [app]);
 
   useEffect(() => {
-    // Listen to fullscreen changes - works for both regular and iframe contexts
+    // Only access this document; the parent page may be cross-origin in an iframe.
     const onFullscreenChange = () => {
-      // Check fullscreen on document or window.top for iframe contexts
-      const isFullscreen = !!(
-        document.fullscreenElement ||
-        (window.top as any)?.document?.fullscreenElement ||
-        (window as any).fullscreen
-      );
-      gameState.setState({ isFullscreen });
+      gameState.setState({ isFullscreen: !!document.fullscreenElement });
     };
 
     document.addEventListener("fullscreenchange", onFullscreenChange);
-    // Also listen to the parent document for iframe contexts
-    if (window.top !== window) {
-      try {
-        (window.top as any).document?.addEventListener("fullscreenchange", onFullscreenChange);
-      } catch (e) {
-        // CORS issues possible
-      }
-    }
-
-    // Set initial state
     onFullscreenChange();
 
     return () => {
       document.removeEventListener("fullscreenchange", onFullscreenChange);
-      if (window.top !== window) {
-        try {
-          (window.top as any).document?.removeEventListener("fullscreenchange", onFullscreenChange);
-        } catch (e) {
-          // CORS issues possible
-        }
-      }
     };
   }, []);
 
