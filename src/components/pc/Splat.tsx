@@ -3,8 +3,10 @@ import { Splat as SplatScript } from "@/scripts/Splat";
 import { getAssetUrl } from "@/utils/asset-url";
 import { Entity } from "@playcanvas/react";
 import { Script } from "@playcanvas/react/components";
-import type { EntityProps } from "node_modules/@playcanvas/react/dist/Entity";
 import { Entity as PcEntity } from "playcanvas";
+import type { ComponentPropsWithoutRef } from "react";
+
+type EntityProps = ComponentPropsWithoutRef<typeof Entity>;
 
 export function Splat({
   path,

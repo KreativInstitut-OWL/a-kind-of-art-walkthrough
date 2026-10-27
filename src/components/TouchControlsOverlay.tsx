@@ -1,10 +1,8 @@
 import { useTouchUI, touchUIStore } from "@/lib/stores";
 import { Move, Rotate3D } from "lucide-react";
-import { useIsTouch } from "@/hooks/useIsTouch";
 import React from "react";
 
 export function TouchControlsOverlay() {
-  const enabled = useIsTouch();
   const { left, right } = useTouchUI();
   const [leftTouchId, setLeftTouchId] = React.useState<number | null>(null);
   const [rightTouchId, setRightTouchId] = React.useState<number | null>(null);

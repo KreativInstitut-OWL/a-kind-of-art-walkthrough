@@ -17,6 +17,8 @@ export default defineConfig({
     allowedHosts: ["localhost", ".local", ".ngrok-free.app"],
     host: "0.0.0.0",
   },
+  // Relative base so the SPA build works from any sub-path (e.g. GitHub Pages project sites)
+  base: isWebComponent ? "/" : "./",
   publicDir: isWebComponent ? false : "public", // Don't copy public assets for web component builds
   define: isWebComponent
     ? {

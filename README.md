@@ -18,6 +18,22 @@ npm run build
 
 > Vite build output is in the `dist` folder after building. The build can be deployed to any static file server.
 
+## GitHub Pages
+
+Every push to `main` is built and deployed by [.github/workflows/deploy.yml](.github/workflows/deploy.yml) (Repository Settings → Pages → Source: **GitHub Actions**).
+
+Embed it as an iframe:
+
+```html
+<iframe
+  src="https://kreativinstitut-owl.github.io/a-kind-of-art-walkthrough/"
+  style="width: 100%; aspect-ratio: 16 / 9; border: 0;"
+  allow="fullscreen; pointer-lock; xr-spatial-tracking; gyroscope; accelerometer"
+  allowfullscreen
+  loading="lazy"
+></iframe>
+```
+
 ## Webcomponent
 
 Build the webcomponent for embedding in other websites:
