@@ -49,7 +49,7 @@ function ResizeApp() {
 }
 
 export function PlayCanvasApplication() {
-  const { currentSceneId, quality, isFullscreenMobileOverlayOpen } = useGameState();
+  const { currentSceneId, quality } = useGameState();
   const preferredControls = usePreferredControls();
 
   // Detect mobile device
@@ -98,7 +98,7 @@ export function PlayCanvasApplication() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative w-full h-full">
+      <div className={`relative w-full h-full overflow-hidden ${preferredControls === "touch" ? "" : ""}`} style={preferredControls === "touch" ? { aspectRatio: "16/9", maxHeight: "100vh" } : undefined}>
         <Application
           fillMode={FILLMODE_NONE}
           resolutionMode={RESOLUTION_AUTO}

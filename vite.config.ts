@@ -14,7 +14,8 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: [".ngrok-free.app"],
+    allowedHosts: ["localhost", ".local", ".ngrok-free.app"],
+    host: "0.0.0.0",
   },
   publicDir: isWebComponent ? false : "public", // Don't copy public assets for web component builds
   define: isWebComponent

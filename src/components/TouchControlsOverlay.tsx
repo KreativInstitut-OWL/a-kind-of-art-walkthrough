@@ -10,7 +10,8 @@ export function TouchControlsOverlay() {
   const [rightTouchId, setRightTouchId] = React.useState<number | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  if (!enabled) return null;
+  // Hide joysticks on mobile
+  return null;
 
   // Get container dimensions for responsive positioning
   const containerHeight = containerRef.current?.offsetHeight || window.innerHeight;

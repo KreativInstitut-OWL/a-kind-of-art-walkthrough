@@ -19,22 +19,6 @@ export function GenericOverlay() {
 
   const handleFullscreen = async () => {
     try {
-      // For web components, we need to get the container differently
-      // First try to find the app container within this component
-      let appContainer = document.querySelector(".relative.w-full.h-full");
-      
-      // If not found (we're in Shadow DOM), try to get the closest container or use the shadow host
-      if (!appContainer) {
-        // Try to find the canvas container or main app div
-        appContainer = document.querySelector("div[style*='width: 100%'][style*='height: 100%']");
-      }
-      
-      if (!appContainer) {
-        console.warn("Could not find fullscreen container");
-        return;
-      }
-
-      // Check current fullscreen state
       const isCurrentlyFullscreen = !!(
         document.fullscreenElement ||
         (document as any).webkitFullscreenElement ||
@@ -43,28 +27,62 @@ export function GenericOverlay() {
       );
 
       if (!isCurrentlyFullscreen) {
-        // Try to request fullscreen on the app container
+        const elem = (document.querySelector("#root") || document.documentElement) as any;
+        
+        console.log("Requesting fullscreen on:", elem);
+        console.log("Has requestFullscreen:", !!elem.requestFullscreen);
+        console.log("Has webkitRequestFullscreen:", !!elem.webkitRequestFullscreen);
+        console.log("Has mozRequestFullScreen:", !!elem.mozRequestFullScreen);
+        console.log("Has msRequestFullscreen:", !!elem.msRequestFullscreen);
+        
+        let requested = false;
+        
         try {
-          await (appContainer as any).requestFullscreen?.() ||
-          await (appContainer as any).webkitRequestFullscreen?.() ||
-          await (appContainer as any).mozRequestFullScreen?.() ||
-          await (appContainer as any).msRequestFullscreen?.();
+          if (elem.requestFullscreen) {
+            console.log("Using requestFullscreen");
+            await elem.requestFullscreen();
+            requested = true;
+          } else if (elem.webkitRequestFullscreen) {
+            console.log("Using webkitRequestFullscreen");
+            await elem.webkitRequestFullscreen();
+            requested = true;
+          } else if (elem.mozRequestFullScreen) {
+            console.log("Using mozRequestFullScreen");
+            await elem.mozRequestFullScreen();
+            requested = true;
+          } else if (elem.msRequestFullscreen) {
+            console.log("Using msRequestFullscreen");
+            await elem.msRequestFullscreen();
+            requested = true;
+          }
+          
+          if (requested) {
+            console.log("Fullscreen request successful");
+          } else {
+            console.warn("No fullscreen method available");
+          }
         } catch (error) {
-          console.warn("Fullscreen request failed:", error);
+          console.error("Fullscreen request error:", error);
         }
       } else {
-        // Try to exit fullscreen
+        console.log("Exiting fullscreen");
         try {
-          await document.exitFullscreen?.() ||
-          await (document as any).webkitExitFullscreen?.() ||
-          await (document as any).mozCancelFullScreen?.() ||
-          await (document as any).msExitFullscreen?.();
+          if (document.exitFullscreen) {
+            await document.exitFullscreen();
+          } else if ((document as any).webkitExitFullscreen) {
+            await (document as any).webkitExitFullscreen();
+          } else if ((document as any).mozCancelFullScreen) {
+            await (document as any).mozCancelFullScreen();
+          } else if ((document as any).msExitFullscreen) {
+            await (document as any).msExitFullscreen();
+          }
+          console.log("Exited fullscreen");
         } catch (error) {
-          console.warn("Exit fullscreen failed:", error);
+          console.error("Exit fullscreen error:", error);
         }
       }
     } catch (error) {
-      console.warn("Fullscreen error:", error);
+      console.error("Fullscreen handler error:", error);
     }
   };
 

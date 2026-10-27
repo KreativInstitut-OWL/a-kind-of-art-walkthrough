@@ -9,55 +9,79 @@ export function IntroOverlay() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
-  // Close intro when clicking outside
+  // Close intro when clicking outside (only on desktop)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (overlayRef.current?.contains(target) && target === overlayRef.current) {
-        gameState.setIntroOpen(false);
+      if (preferredControls !== "touch") {
+        const target = event.target as Node;
+        if (overlayRef.current?.contains(target) && target === overlayRef.current) {
+          gameState.setIntroOpen(false);
+        }
       }
     };
 
     if (isIntroOpen) {
       document.addEventListener("click", handleClickOutside);
-      return () => document.removeEventListener("click", handleClickOutside);
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+        document.body.style.overflow = "";
+      };
     }
-  }, [isIntroOpen]);
+  }, [isIntroOpen, preferredControls]);
 
   if (!isIntroOpen) return null;
+
+  const isMobile = preferredControls === "touch";
 
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+      className="absolute inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm overflow-hidden"
     >
       <div
-        className={`bg-black border border-white/20 rounded-lg p-8 max-h-[90vh] overflow-y-auto ${
-          preferredControls === "touch" ? "max-w-none w-11/12" : "max-w-2xl"
+        className={`bg-black border border-white/20 rounded-lg ${
+          isMobile 
+            ? "w-[298px] h-[168px] p-2 flex flex-col justify-center overflow-hidden" 
+            : "max-w-2xl p-8 max-h-[90vh] overflow-y-auto"
         }`}
       >
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t("intro.welcome")}
-          </h1>
-          <img src="/kio_line.svg" alt="decorative line" className="h-5 w-full" />
-        </div>
+        {isMobile ? (
+          // Mobile version - landscape oriented banner
+          <div className="text-center space-y-0 overflow-hidden flex flex-col justify-center h-full">
+            <h1 className="text-sm font-bold text-white leading-tight">
+              {t("intro.welcome")}
+            </h1>
+            <p className="text-white/80 text-[8px] leading-tight">
+              {t("mobile.desktopRecommendation")}
+            </p>
+          </div>
+        ) : (
+          // Desktop version
+          <>
+            {/* Header */}
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                {t("intro.welcome")}
+              </h1>
+            </div>
 
-        {/* Content */}
-        <div className="space-y-6 text-white/80 text-sm md:text-base leading-relaxed mb-8">
-          <p>
-            Erkunden Sie die Ausstellung „A Kind of Art" digital – eine einzigartige Reise durch KI-generierte Kunstwerke, die künstlerische Tradition und moderne Technologie verschmelzen.
-          </p>
-        </div>
+            {/* Content */}
+            <div className="space-y-6 text-white/80 text-sm md:text-base leading-relaxed mb-8">
+              <p>
+                {t("intro.description")}
+              </p>
+            </div>
 
-        {/* CTA Button */}
-        <button
-          onClick={() => gameState.setIntroOpen(false)}
-          className="w-full px-6 py-3 md:py-4 bg-[#55fc27] text-black font-bold text-lg hover:bg-[#55fc27]/80 transition-colors active:scale-95 transform"
-        >
-          {t("intro.discover")}
-        </button>
+            {/* CTA Button */}
+            <button
+              onClick={() => gameState.setIntroOpen(false)}
+              className="w-full px-6 py-3 md:py-4 bg-[#55fc27] text-black font-bold text-lg hover:bg-[#55fc27]/80 transition-colors active:scale-95 transform"
+            >
+              {t("intro.discover")}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

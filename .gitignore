@@ -28,3 +28,5 @@ dist-webcomponent
 .renamify/
 .playcanvas-example
 .cursor/todo.md
+
+dist-webcomponent.zip

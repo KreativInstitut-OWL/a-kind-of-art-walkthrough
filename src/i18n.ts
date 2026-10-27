@@ -43,6 +43,10 @@ export const resources = {
         welcome: "Experience A Kind Of Art—now in digital form!",
         skipIntro: "Skip Intro",
         discover: "Discover now!",
+        description: "Explore the \"A Kind of Art\" exhibition digitally – a unique journey through AI-generated artworks that blend artistic tradition with modern technology.",
+      },
+      mobile: {
+        desktopRecommendation: "This experience is best enjoyed on a desktop or laptop computer.",
       },
       loading: "Loading {{sceneName}}...",
     },
@@ -87,6 +91,10 @@ export const resources = {
         welcome: "A Kind Of Art jetzt digital erleben!",
         skipIntro: "Intro überspringen",
         discover: "Jetzt erkunden!",
+        description: "Erkunden Sie die Ausstellung \"A Kind of Art\" digital – eine einzigartige Reise durch KI-generierte Kunstwerke, die künstlerische Tradition und moderne Technologie verschmelzen.",
+      },
+      mobile: {
+        desktopRecommendation: "Dieses Erlebnis funktioniert am besten auf einem Desktop- oder Laptop-Computer.",
       },
       loading: "{{sceneName}} lädt...",
     },

@@ -42,11 +42,15 @@ function App() {
     }
   }, [showQualitySelector]);
 
-  if (showQualitySelector) {
-    return <QualitySelector onSelected={handleQualitySelected} />;
-  }
-
-  return <PlayCanvasApplication />;
+  return (
+    <>
+      {showQualitySelector ? (
+        <QualitySelector onSelected={handleQualitySelected} />
+      ) : (
+        <PlayCanvasApplication />
+      )}
+    </>
+  );
 }
 
 export default App;
